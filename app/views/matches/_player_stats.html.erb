@@ -1,0 +1,9 @@
+
+<p> Player: <%= g.select :player_id, players_options, {:prompt => '--- Select Player ---'} %></p>
+<p> Team: <%= g.select :team_id, teams_options, {:prompt => '---- Select Team ---'} %></p>
+<p> Score: <%= g.text_field :score %></p>
+<p> Shots: <%= g.text_field :shots %></p>
+<p> Hits: <%= g.text_field :hits %></p>
+<p> Time in Zone: <%= g.text_field :offense_time %></p>
+<p> Face offs: <%= g.text_field :face_offs %></p>
+<p> Home: <%= g.check_box :home %> Yes </p> 

@@ -1,0 +1,54 @@
+<div>
+  <div id="match_section">
+    <p>Match Date: <%= f.date_select :match_date %></p>
+    <p>
+      Period Length: <%= f.select :period_length, [10, 20, 30] %> &nbsp;&nbsp;&nbsp;
+      <%= f.check_box :overtime %>Overtime &nbsp;&nbsp;&nbsp;
+      <%= f.check_box :shootout %>Shootout &nbsp;&nbsp;&nbsp;
+      <%= f.check_box :linechanges %>Line changes 
+    </p>
+  </div>
+   <div id="playergame_labels" class="player_cells" style="float:left">
+    <div>Player:</div>
+    <div>Team:</div>
+		<div>Home:</div>
+    <div>Score:</div>
+    <div>Shots:</div>
+    <div>Hits:</div>
+    <div>Time On Attack:</div>
+    <div>Face offs:</div>
+    <div>Penalty Minutes:</div> 
+		<div>Power Play Goals (x/y):</div> 
+		 
+		<div>Short-handed Goals:</div> 
+		<div>Empty Net Goals:</div>
+		<div>Notes:</div>
+  </div>
+  <%# f.fields_for :playergames do |playergame, index| %>
+  <%# @match.playergames.each_with_index do |playergame, index| %>
+    <%# @playergame = player_game %>
+    <%# error_messages_for :playergame %>
+		<%# = render :partial => 'playergame', :locals => {:playergame => playergame, :game_index => index} %>
+		<% tabindex =  0 %>
+    <% f.fields_for :playergames do |g| %>
+			<div class="player_cells" style="float:left">
+				 <% setupTabIndexing( tabindex, 2) %>
+			   <div><%= g.select :player_id, players_options, {:prompt => '--- Select Player ---'}, :tabindex => playergame_tabindex  %></div>
+			   <div><%= g.select :team_id, teams_options, {:prompt => '---- Select Team ---'}, :tabindex => playergame_tabindex %></div>
+			   <div><%= g.select :home,  [['No', false], ['Yes', true]], {}, :tabindex => playergame_tabindex  %></div>
+			   <div><%= g.text_field :score, :tabindex => playergame_tabindex %></div>
+			   <div><%= g.text_field :shots, :tabindex => playergame_tabindex %></div>
+			   <div><%= g.text_field :hits, :tabindex => playergame_tabindex  %></div>
+			   <div><%= g.text_field :time_on_attack_display, :tabindex => playergame_tabindex  %></div>
+			   <div><%= g.text_field :face_offs, :tabindex => playergame_tabindex  %></div>
+			   <div><%= g.text_field :penalty_minutes, :tabindex => playergame_tabindex  %></div> 
+			   <div><%= g.text_field :power_play_goals_display, :tabindex => playergame_tabindex  %></div> 
+			   <div><%= g.text_field :short_handed_goals, :tabindex => playergame_tabindex  %></div> 
+			   <div><%= g.text_field :empty_net_goals, :tabindex => playergame_tabindex  %></div> 
+			   <div><%= g.text_field :notes, :tabindex => playergame_tabindex  %></div>  
+			</div>
+			<% gameindex = tabindex + 1 %>
+		<% end %>
+		
+  <%# end %>
+</div>

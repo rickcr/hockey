@@ -1,0 +1,14 @@
+<h1>Listing matches</h1>
+
+<div class="button-section"> 
+  <%= link_to 'New match', new_match_path %><br/>
+</div>
+
+<% for match in @matches %>
+  <%= render :partial => 'match', :locals => {:match => match} %>
+<% end %>
+<%= will_paginate @matches %>
+ 
+<div class="button-section"> 
+  <%= link_to 'New match', new_match_path %>
+</div>

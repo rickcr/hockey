@@ -1,0 +1,68 @@
+<div class="match-container">
+  <div class="match-table-header">
+    <div class="match-info">
+      <span class="label">Match:</span> <%= match.id %>
+      <span class="label">Date:</span> <%= match.match_date.to_s(:default) %>
+      <br/>
+      <span class="label">Linechanges:</span> <%= match.linechanges ? "Y":"N" %>
+      <span class="label">Overtime:</span> <%= match.overtime ? "Y":"N" %>
+      <% if match.overtime %>
+        <span class="label">Shootout:</span> <%= match.shootout ? "Y":"N" %>
+      <% end %>
+      <span class="label">Period Len:</span> <%= match.period_length %> min.
+    </div>
+    <div style="text-align:right;">
+       
+        <%= link_to 'Show', match %>
+        <%= link_to 'Edit', edit_match_path(match) %>
+        <%= link_to 'Destroy', match, :confirm => 'Are you sure?', :method => :delete %>
+       
+    </div>
+    <div style="background-color:blue;clear:left;"> 
+      <table id="matches-table" cellspacing="1" cellpadding="1" width="100%">
+        <thead>
+          <tr>
+            <th style="text-align:left;">Player</th>
+            <th style="text-align:left;">Team</th>
+            <th style="text-align:center;">Result</th>
+            <th style="text-align:center;">Home</th>
+            <th style="text-align:right;">Score</th>
+            <th style="text-align:right;">Shots</th>
+            <th style="text-align:right;">Hits</th>
+            <th style="text-align:right;">Faceoffs</th>
+						<th style="text-align:right">PP Goals</th>
+            <th style="text-align:right;">Time On Attack</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% match.playergames.each_with_index do |g,i| %> 
+            <tr> 
+              <td style="text-alignt:left;">
+                <%=h "#{g.player.first_name} #{g.player.last_name}" %> 
+              </td>
+              <td style="text-alignt:left;">
+                <%=h g.team.name %>
+              </td>
+              <td style="text-align:center;">
+                <% if g.score > match.playergames[i == 0 ? 1:0].score %>
+                  W
+                <% elsif g.score < match.playergames[i == 0 ? 1:0].score %>
+                  L
+                <% else %>
+                  T
+                <% end %>
+              </td>
+              <td style="text-align:center;"><%=h g.home ? "X":"" %></td>
+              <td style="text-align:right;"><%=h g.score %></td>
+              <td style="text-align:right;"><%=h g.shots %></td>
+              <td style="text-align:right;"><%=h g.hits %></td>
+              <td style="text-align:right;"><%=h g.face_offs %></td>
+							<td style="text-align:right;"><%=h g.power_play_goals_display %></td>
+              <td style="text-align:right;"><%=h g.time_on_attack_display %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    </div>
+</div>
