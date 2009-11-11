@@ -1,13 +1,4 @@
-class Match < ActiveRecord::Base
-  fields do
-    match_date :datetime
-    overtime :boolean, :default => false
-    shootout :boolean, :default => false
-    linechanges :boolean, :default => false
-    period_length :integer
-    game_version :string
-    notes :string
-  end
+class Match < ActiveRecord::Base 
   
   has_many :playergames, :dependent => :destroy
   

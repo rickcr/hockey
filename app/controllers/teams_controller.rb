@@ -1,4 +1,5 @@
 class TeamsController < ApplicationController
+  before_filter :require_user, :except => [ :index, :show ]
   # GET /teams
   # GET /teams.xml
   def index

@@ -1,24 +1,5 @@
 class Playergame < ActiveRecord::Base
-  include MyUtils
-  
-  fields do
-    player_id :integer
-    match_id :integer
-    team_id :integer
-    home :boolean
-    score :integer
-    shots :integer
-    hits :integer
-    face_offs :integer
-    time_on_attack :time
-    penalty_minutes :integer
-    power_play_goals :integer
-    power_plays :integer
-    short_handed_goals :integer
-    empty_net_goals :integer
-    notes :string
-    timestamps
-  end
+  include MyUtils 
   
   validates_presence_of :player_id, :team_id, :time_on_attack
   validates_numericality_of :score, :shots, :hits, :face_offs

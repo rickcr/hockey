@@ -1,7 +1,8 @@
-require 'fastercsv'
+#require 'fastercsv'
 
 namespace :dataimport do
-  task(:cvsimport  => :environment) do
+  desc "The dataimport task to populate db from the csv file of matches (run as rake dataimport:csvimport)"
+  task(:csvimport  => :environment) do
     
     rickid = Player.find(:first, :conditions => "first_name='Rick'").id
     steveid = Player.find(:first, :conditions => "first_name='Steve'").id

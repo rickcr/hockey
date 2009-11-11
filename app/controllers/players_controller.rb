@@ -1,4 +1,5 @@
 class PlayersController < ApplicationController
+  before_filter :require_user, :except => [ :index, :show ]
   # GET /players
   # GET /players.xml
   def index

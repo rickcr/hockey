@@ -1,15 +1,19 @@
 class MatchesController < ApplicationController
   #include Stats
-  
-  #before_filter :admin_required, :except => [ :index, :show ]
+   
+  before_filter :require_user, :except => [ :index, :show ]
   
   def index
-    @matches = Match.paginate :all, :page => params[:page], :order => 'match_date DESC', :include => :playergames
+    @matches = Match.paginate :all, :page => params[:page], 
+      :order => 'match_date DESC', :include => {:playergames => [:player,:team]} 
+    
+    
     #@games = Playergame.find(:all)
     #  gameStats( @games )
       
-    #@matches = Match.find(:all, :include => :playergames)
-   
+    #@matches = Match.find(:all, :include => {:playergames => :team})
+    #@matches = Match.find(:all, :include => {:playergames => [:team,:player]})
+   #@matches = Match.find(:all, :include => :playergames)
     #logger.debug "hash #{hash}"
     #ar = @games[0].methods
     #ar = @games[0].protected_methods
